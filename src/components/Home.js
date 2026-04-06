@@ -26,20 +26,17 @@ function Home() {
     setUsername(user.username || localStorage.getItem("username") || "User");
   }, [navigate]);
 
-  // ✅ FIXED LOGOUT
   const handleLogout = () => {
     localStorage.removeItem("isLoggedIn");
     localStorage.removeItem("username");
     localStorage.removeItem("userProfile");
-
-    // force full refresh
     window.location.href = "/";
   };
 
   return (
     <div className="home-container">
 
-      {/* 🔝 NAVBAR */}
+      {/* NAVBAR */}
       <div className="navbar">
         <div className="profile-section">
           <div
@@ -57,23 +54,21 @@ function Home() {
               <p onClick={() => { setOpenProfile(false); navigate("/profile"); }}>
                 Profile
               </p>
-
               <p onClick={() => { setOpenProfile(false); navigate("/jobs"); }}>
                 Job Matcher 🧠
               </p>
-
               <p onClick={() => { setOpenProfile(false); navigate("/add"); }}>
                 Placement Predictor 📊
               </p>
-
               <p onClick={() => { setOpenProfile(false); navigate("/chat"); }}>
                 Chat Assistant 🤖
               </p>
-
+              <p onClick={() => { setOpenProfile(false); navigate("/resume"); }}>
+                Resume Comparator 📄
+              </p>
               <p onClick={() => { setOpenProfile(false); navigate("/feature"); }}>
                 Issue / Feature Request 📝
               </p>
-
               <p onClick={() => setOpenTheme(!openTheme)}>
                 Theme 🎨
               </p>
@@ -88,8 +83,6 @@ function Home() {
               )}
 
               <hr />
-
-              {/* ✅ FIXED LOGOUT BUTTON */}
               <p
                 className="logout"
                 onClick={() => {
@@ -99,13 +92,12 @@ function Home() {
               >
                 Log out
               </p>
-
             </div>
           )}
         </div>
       </div>
 
-      {/* 🌟 HERO */}
+      {/* HERO */}
       <div className="hero">
         <h1>
           Track Your <br />
@@ -120,21 +112,21 @@ function Home() {
           <button className="btn-primary" onClick={() => navigate("/add")}>
             📊 Placement Predictor
           </button>
-
           <button className="btn-secondary" onClick={() => navigate("/jobs")}>
             🧠 Job Matcher
           </button>
-
           <button className="btn-chat" onClick={() => navigate("/chat")}>
             🤖 Chat Assistant
+          </button>
+          <button className="btn-resume" onClick={() => navigate("/resume")}>
+            📄 Resume Comparator
           </button>
         </div>
       </div>
 
-      {/* 💎 FEATURES */}
+      {/* FEATURES */}
       <div className="features">
         <h2>Powerful Features</h2>
-
         <div className="feature-grid">
           {features.map((f, i) => (
             <div key={i} className="card">
@@ -145,10 +137,9 @@ function Home() {
         </div>
       </div>
 
-      {/* 🌐 PLATFORMS */}
+      {/* PLATFORMS */}
       <div className="platforms">
         <h2>Supported Platforms</h2>
-
         <div className="platform-list">
           {platforms.map((p, i) => (
             <div key={i} className="platform">{p}</div>

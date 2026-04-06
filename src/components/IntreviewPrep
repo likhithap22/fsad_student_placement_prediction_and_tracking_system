@@ -1,0 +1,39 @@
+import React, { useState } from "react";
+
+function InterviewPrep() {
+  const [topic, setTopic] = useState("");
+  const [questions, setQuestions] = useState([]);
+
+  const fetchQuestions = async () => {
+    const res = await fetch(`http://localhost:8080/interview/questions?topic=${topic}`);
+    const data = await res.json();
+    setQuestions(data);
+  };
+
+  return (
+    <div style={{ textAlign: "center", marginTop: "40px" }}>
+      <h2>Interview Preparation</h2>
+      <input
+        type="text"
+        placeholder="Enter topic (e.g., Java, SQL)"
+        value={topic}
+        onChange={(e) => setTopic(e.target.value)}
+        style={{ width: "250px", padding: "5px" }}
+      />
+      <br /><br />
+      <button onClick={fetchQuestions}>Get Questions</button>
+
+      {questions.length > 0 && (
+        <div style={{ marginTop: "20px" }}>
+          <h3>Practice Questions:</h3>
+          <ul>
+            {questions.map((q, i) => <li key={i}>{q}</li>)}
+          </ul>
+        </div>
+      )}
+    </div>
+  );
+}
+
+export default InterviewPrep;
+        

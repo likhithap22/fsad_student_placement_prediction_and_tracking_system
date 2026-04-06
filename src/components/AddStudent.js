@@ -62,30 +62,51 @@ function AddStudent() {
     ];
 
     for (let f of fields) {
-      if (!data[f]) {
+      if (data[f] === "" || data[f] === null) {
         alert("Fill all fields");
         return;
       }
     }
 
-    const total =
-      Number(data.mentorpick) +
-      Number(data.codechef) +
-      Number(data.leetcode) +
-      Number(data.aptitude);
+    // ✅ SAFE NUMBER CONVERSION
+    const mp = parseFloat(data.mentorpick) || 0;
+    const cc = parseFloat(data.codechef) || 0;
+    const lc = parseFloat(data.leetcode) || 0;
+    const apt = parseFloat(data.aptitude) || 0;
+    const rank = parseFloat(data.rank) || 0;
 
-    const score = total / 4 - Number(data.rank) * 0.1;
-    const chance = Math.max(0, Math.min(score, 100));
+    // ✅ NORMALIZE (ASSUME INPUT OUT OF 100)
+    const avgScore = (mp + cc + lc + apt) / 4;
 
-    const companies = {
-      TCS: Math.min(100, chance + 10),
-      Infosys: chance,
-      Wipro: Math.max(0, chance - 5),
-      Amazon: Math.max(0, chance - 20),
-      Google: Math.max(0, chance - 30),
-    };
+    // ✅ STRONG RANK IMPACT (THIS WAS YOUR MAIN PROBLEM)
+    let rankFactor;
 
-    setResult({ chance, companies, total });
+    if (rank <= 50) rankFactor = 1.0;
+    else if (rank <= 100) rankFactor = 0.9;
+    else if (rank <= 200) rankFactor = 0.75;
+    else if (rank <= 500) rankFactor = 0.5;
+    else rankFactor = 0.3;
+
+    // ✅ FINAL CHANCE
+    let chance = avgScore * rankFactor;
+
+    // ✅ CLAMP (VERY IMPORTANT)
+    chance = Math.max(0, Math.min(100, chance));
+
+    // ✅ REALISTIC COMPANY DISTRIBUTION
+	const companies = {
+	  TCS: chance > 20 ? chance + 5 : chance * 0.5,
+	  Infosys: chance,
+	  Wipro: chance > 30 ? chance - 10 : chance * 0.6,
+	  Amazon: chance > 50 ? chance - 25 : 0,
+	  Google: chance > 70 ? chance - 40 : 0,
+	};
+
+    setResult({
+      chance,
+      companies,
+      total: avgScore,
+    });
   };
 
   // ✅ SAVE (FULLY FIXED)

@@ -1,10 +1,5 @@
 import React from "react";
-import {
-  BrowserRouter,
-  Routes,
-  Route,
-  Navigate
-} from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
 import Login from "./components/Login";
 import Home from "./components/Home";
@@ -14,32 +9,29 @@ import Profile from "./components/Profile";
 import Registration from "./components/Registration";
 import JobMatcher from "./components/JobMatcher";
 import Chatbot from "./components/Chatbot";
-import FeatureRequest from "./components/FeatureRequest"; // ✅ NEW
+import FeatureRequest from "./components/FeatureRequest";
+import ResumeComparator from "./components/ResumeComparator"; // ✅ NEW
 
-// 🔒 Protected Route
+// 🔒 Protected Route Component
 function PrivateRoute({ children }) {
-  const isLoggedIn = localStorage.getItem("isLoggedIn");
-  return isLoggedIn === "true" ? children : <Navigate to="/" />;
+  const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
+  return isLoggedIn ? children : <Navigate to="/" />;
 }
 
 function App() {
-  const isLoggedIn = localStorage.getItem("isLoggedIn");
+  const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
 
   return (
     <BrowserRouter>
       <Routes>
 
-        {/* ✅ LOGIN */}
+        {/* LOGIN ROUTE */}
         <Route
           path="/"
-          element={
-            isLoggedIn === "true"
-              ? <Navigate to="/home" />
-              : <Login />
-          }
+          element={isLoggedIn ? <Navigate to="/home" /> : <Login />}
         />
 
-        {/* ✅ HOME */}
+        {/* HOME ROUTE */}
         <Route
           path="/home"
           element={
@@ -49,7 +41,7 @@ function App() {
           }
         />
 
-        {/* ✅ PLACEMENT PREDICTOR */}
+        {/* ADD STUDENT / PLACEMENT PREDICTOR */}
         <Route
           path="/add"
           element={
@@ -59,7 +51,7 @@ function App() {
           }
         />
 
-        {/* ✅ JOB MATCHER */}
+        {/* JOB MATCHER */}
         <Route
           path="/jobs"
           element={
@@ -69,7 +61,7 @@ function App() {
           }
         />
 
-        {/* ✅ CHATBOT */}
+        {/* CHATBOT */}
         <Route
           path="/chat"
           element={
@@ -79,7 +71,7 @@ function App() {
           }
         />
 
-        {/* ✅ FEATURE REQUEST (NEW FIX) */}
+        {/* FEATURE REQUEST */}
         <Route
           path="/feature"
           element={
@@ -89,7 +81,7 @@ function App() {
           }
         />
 
-        {/* ✅ TIPS */}
+        {/* TIPS */}
         <Route
           path="/tips"
           element={
@@ -99,7 +91,7 @@ function App() {
           }
         />
 
-        {/* ✅ PROFILE */}
+        {/* PROFILE */}
         <Route
           path="/profile"
           element={
@@ -109,7 +101,7 @@ function App() {
           }
         />
 
-        {/* ✅ REGISTRATION */}
+        {/* REGISTRATION */}
         <Route
           path="/register"
           element={
@@ -119,7 +111,17 @@ function App() {
           }
         />
 
-        {/* ❌ INVALID ROUTE */}
+        {/* RESUME COMPARATOR */}
+        <Route
+          path="/resume"
+          element={
+            <PrivateRoute>
+              <ResumeComparator />
+            </PrivateRoute>
+          }
+        />
+
+        {/* INVALID ROUTE */}
         <Route path="*" element={<Navigate to="/" />} />
 
       </Routes>
