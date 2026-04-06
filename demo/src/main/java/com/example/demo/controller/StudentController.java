@@ -2,7 +2,9 @@ package com.example.demo.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
+
 import com.example.demo.model.Student;
 import com.example.demo.service.StudentService;
 
@@ -22,6 +24,11 @@ public class StudentController {
     @PostMapping
     public Student save(@RequestBody Student s) {
         return service.save(s);
+    }
+
+    @PostMapping("/predict")
+    public Student predict(@RequestBody Student s) {
+        return service.predictOnly(s);
     }
 
     @DeleteMapping("/{id}")

@@ -3,7 +3,6 @@ package com.example.demo.model;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "students")
 public class Student {
 
     @Id
@@ -13,18 +12,16 @@ public class Student {
     private String name;
     private String roll;
 
-    private int aptitude;
-    private int mentorpick;
-    private int codechef;
-    private int leetcode;
+    private int leetcodeScore;
+    private int codechefScore;
+    private int mentorpickScore;
+    private int aptitudeScore;
 
-    @Column(name = "student_rank")
-    private int studentRank;
+    private int placementChance;
+    private String companyLevel;
+    private String predictedCompanies;
 
-    private double total;
-    private double chance;
-
-    // GETTERS & SETTERS
+    // Getters & Setters
 
     public Long getId() { return id; }
 
@@ -34,24 +31,24 @@ public class Student {
     public String getRoll() { return roll; }
     public void setRoll(String roll) { this.roll = roll; }
 
-    public int getAptitude() { return aptitude; }
-    public void setAptitude(int aptitude) { this.aptitude = aptitude; }
+    public int getLeetcodeScore() { return leetcodeScore; }
+    public void setLeetcodeScore(int leetcodeScore) { this.leetcodeScore = leetcodeScore; }
 
-    public int getMentorpick() { return mentorpick; }
-    public void setMentorpick(int mentorpick) { this.mentorpick = mentorpick; }
+    public int getCodechefScore() { return codechefScore; }
+    public void setCodechefScore(int codechefScore) { this.codechefScore = codechefScore; }
 
-    public int getCodechef() { return codechef; }
-    public void setCodechef(int codechef) { this.codechef = codechef; }
+    public int getMentorpickScore() { return mentorpickScore; }
+    public void setMentorpickScore(int mentorpickScore) { this.mentorpickScore = mentorpickScore; }
 
-    public int getLeetcode() { return leetcode; }
-    public void setLeetcode(int leetcode) { this.leetcode = leetcode; }
+    public int getAptitudeScore() { return aptitudeScore; }
+    public void setAptitudeScore(int aptitudeScore) { this.aptitudeScore = aptitudeScore; }
 
-    public int getStudentRank() { return studentRank; }
-    public void setStudentRank(int studentRank) { this.studentRank = studentRank; }
+    public int getPlacementChance() { return placementChance; }
+    public void setPlacementChance(int placementChance) { this.placementChance = placementChance; }
 
-    public double getTotal() { return total; }
-    public void setTotal(double total) { this.total = total; }
+    public String getCompanyLevel() { return companyLevel; }
+    public void setCompanyLevel(String companyLevel) { this.companyLevel = companyLevel; }
 
-    public double getChance() { return chance; }
-    public void setChance(double chance) { this.chance = chance; }
+    public String getPredictedCompanies() { return predictedCompanies; }
+    public void setPredictedCompanies(String predictedCompanies) { this.predictedCompanies = predictedCompanies; }
 }
