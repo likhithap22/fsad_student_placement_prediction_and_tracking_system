@@ -24,7 +24,10 @@ public class Student {
     private double total;
     private double chance;
 
-    // GETTERS & SETTERS
+    // ✅ DEFAULT CONSTRUCTOR (VERY IMPORTANT)
+    public Student() {}
+
+    // ✅ GETTERS & SETTERS
 
     public Long getId() { return id; }
 
